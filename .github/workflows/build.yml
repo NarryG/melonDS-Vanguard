@@ -7,11 +7,7 @@ jobs:
     steps:
     # Setup tooling
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.0
-    - name: Setup Nuget
-      uses: nuget/setup-nuget@v1.0.2
-      with:
-        nuget-version: 'latest'
+      uses: microsoft/setup-msbuild@v1.0.2
 
     # Setup RTCV
     - name: Checkout RTCV peer dependency
@@ -21,7 +17,7 @@ jobs:
         ref: '506'
         path: 'RTCV'
     - name: Restore Nuget packages in RTCV
-      run: nuget restore '.\RTCV\'
+      run: msbuild /t:restore '.\RTCV\'
     - name: Build RTCV
       run: msbuild '.\RTCV\'
 
